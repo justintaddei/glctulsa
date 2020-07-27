@@ -1,15 +1,18 @@
 <template>
-  <button v-wave class="button">
-    <Icon v-if="icon" :name="icon" />
+  <button :disabled="disabled" v-wave :class="['button', look]">
+    <Icon :name="icon" />
     <span><slot /></span>
   </button>
 </template>
 
 <script>
 export default {
-    props: {
-        icon: String
-    }
+  name: 'Button',
+  props: {
+    icon: String,
+    disabled: Boolean,
+    look: String
+  }
 }
 </script>
 
@@ -21,6 +24,8 @@ export default {
 
   overflow: hidden;
 
+  user-select: none;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +36,7 @@ export default {
 
   cursor: pointer;
 
-  transition: box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04),
     0px 2px 6px rgba(138, 15, 15, 0.12), 0px 16px 24px rgba(138, 15, 15, 0.2);
 
@@ -47,6 +52,25 @@ export default {
 
   span {
     line-height: 32px;
+  }
+
+  &[disabled] {
+    background: $disabled;
+    box-shadow: none;
+    pointer-events: none;
+  }
+}
+
+.button.flat {
+  box-shadow: none;
+  color: #000;
+  background: $gray;
+
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:active {
+    background: #ccc;
   }
 }
 </style>

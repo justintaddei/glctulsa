@@ -37,6 +37,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$input-height: 64px;
+
 .text-field {
   width: 100%;
 
@@ -47,7 +49,7 @@ export default {
 
   .input-wrapper {
     position: relative;
-    height: 48px;
+    height: $input-height;
     width: 100%;
     margin: 8px 0 0 0;
 
@@ -57,7 +59,7 @@ export default {
   }
 
   input {
-    height: 48px;
+    height: $input-height;
     padding: 0 16px;
     background: #f9f9f9;
     // background: #fff;

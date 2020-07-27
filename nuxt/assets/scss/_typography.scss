@@ -1,3 +1,8 @@
+* {
+  font-family: $font--body;
+  font-size: $font-size--normal;
+}
+
 h1,
 h2,
 h3,
@@ -6,24 +11,20 @@ h4 {
 }
 
 h1 {
-  font-size: 3.157rem;
+  font-size: $font-size--heading-1;
 }
 h2 {
-  font-size: 2.369rem;
+  font-size: $font-size--heading-2;
 }
 h3 {
-  font-size: 1.777rem;
+  font-size: $font-size--heading-3;
 }
 h4,
 h5 {
-  font-size: 1.333rem;
-}
-
-* {
-  font-family: $font--body;
+  font-size: $font-size--title;
 }
 
 small,
 .text--small {
-  font-size: 0.75rem;
+  font-size: $font-size--small;
 }

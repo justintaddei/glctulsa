@@ -9,6 +9,7 @@
     :width="size"
     :height="size"
     :fill="fill"
+    class="logo"
   >
     <path
       d="M540 0c298.034 0 540 241.965 540 540 0 298.034-241.966 540-540 540S0 838.033 0 540C0 241.964 241.966 0 540 0zm0 64c262.712 0 476 213.288 476 476 0 262.711-213.288 476-476 476S64 802.71 64 540C64 277.287 277.288 64 540 64z"
@@ -37,16 +38,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.NuxtLogo {
-  animation: 1s appear;
-  margin: auto;
-}
-
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-}
-</style>

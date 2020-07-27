@@ -1,27 +1,32 @@
 <template>
-  <div
-    class="icon"
-    :style="{ stroke: color }"
-    v-html="require(`~/assets/icons/${name}.svg?raw`)"
-  />
+  <svg class="icon">
+    <use :xlink:href="`#${name}`" />
+  </svg>
 </template>
 
 <script>
 export default {
-    name: "icon",
-    props: {
-        name: String,
-        color: {
-            type: String,
-            default: 'currentColor'
-        }
+  name: 'icon',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    spin: {
+      type: Boolean,
+      default: false
     }
+  }
 }
 </script>
 
-<style scoped>
-.icon {
-  width: 32px;
-  height: 32px;
+<style>
+svg.icon {
+  stroke: currentColor;
+  fill: none;
+  height: 24px;
+  margin-bottom: 0.125em;
+  vertical-align: middle;
+  width: 24px;
 }
 </style>

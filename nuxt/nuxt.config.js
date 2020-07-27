@@ -1,4 +1,7 @@
 export default {
+  publicRuntimeConfig: {
+    authServer: 'http://localhost:3001/auth'
+  },
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
@@ -21,17 +24,17 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
-      },
+        content: process.env.npm_package_description || ''
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     link: [
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Alata&family=Comfortaa&display=swap',
-      },
-    ],
+          'https://fonts.googleapis.com/css2?family=Alata&family=Comfortaa&display=swap'
+      }
+    ]
   },
   /*
    ** Global CSS
@@ -55,17 +58,17 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/http',
-    '@nuxtjs/auth',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/style-resources',
     '@nuxtjs/svg',
-    'v-wave/nuxt',
+    'v-wave/nuxt'
   ],
   server: {
-    port: 3000,
+    port: 3000
   },
-  http: {
-    baseURL: 'http://localhost:3000',
+  axios: {
+    baseURL: 'http://localhost:3000'
   },
   /*
    ** Build configuration
@@ -74,26 +77,42 @@ export default {
   build: {},
 
   styleResources: {
-    scss: '~/assets/scss/variables.scss',
+    scss: '~/assets/scss/variables.scss'
   },
 
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/admin'
+    },
     strategies: {
       local: {
-        endpoints: {
-          login: {
-            url: '/api/auth/login',
-            method: 'post',
-            propertyName: 'token',
-          },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+        scheme: 'refresh',
+        token: {
+          property: 'accessToken',
+          maxAge: 1800,
+          type: 'Bearer'
         },
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
-      },
-    },
-  },
+        refreshToken: {
+          property: 'refreshToken',
+          data: 'refreshToken',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: 'http://localhost:3001/auth/login', method: 'post' },
+          refresh: {
+            url: 'http://localhost:3001/auth/refresh-token',
+            method: 'post'
+          },
+          user: { url: 'http://localhost:3001/user', method: 'get' },
+          logout: { url: 'http://localhost:3001/auth/logout', method: 'delete' }
+        }
+      }
+    }
+  }
 }
